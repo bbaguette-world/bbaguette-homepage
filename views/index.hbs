@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Bbaguette</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+  div {
+    display: flex; justify-content: center; align-items: center;
+  }
+</style>
+<body>
+  <div>
+    <h1>Bbaguette world</h1>
+  </div>
+
+  <div>
+    <h4>
+      Just click images, you will pay <input onchange="App.changePOP()" style="text-align:right; width: 20%;" type="number" id="value" value="10"/> POP,
+       You can Get <span style="color:blue;" id="BBGT-value"></span> BBGT
+      </h4>  
+  </div>
+  <div>
+    <h4>
+      You can buy BBGT After 
+      <span style="color:blue;" id="required-block"></span> Block. 
+      <a href="https://explorer.popcateum.org/?network=Popcateum">check here</a>
+    </h4>
+  </div>
+  <div>
+    <h4>This is Second Public Sale, Total Remain: <span id="Buy-BBGT-getBalance" style="color: blue;"></span> BBGT</h4>
+  </div>
+
+  <br />
+  <br />
+
+  <div onclick="App.buyBBGT()">
+    <img style="width: 15%;" src="./images/bb1.png">
+    <img style="width: 15%;" src="./images/bb2.png">
+    <img style="width: 15%;" src="./images/bb3.png">
+    <img style="width: 15%;" src="./images/bb5.png">
+    <img style="width: 15%;" src="./images/bb6.png">
+  </div>
+  <div>
+    <img style="width: 15%;" src="./images/bb7.png">
+    <img style="width: 15%;" src="./images/bb8.png">
+    <img style="width: 15%;" src="./images/bb9.png">
+    <img style="width: 15%;" src="./images/bb10.png">
+    <img style="width: 15%;" src="./images/bb11.png">
+  </div>
+  <br/>
+  <div>
+    <img style="width: 30%;" src="./images/Roadmap.jpeg">
+  </div>
+  <br/>
+  <div>
+    <h1>Official Partners</h1>
+  </div>
+  <div>
+    <img style="width: 10%;" src="./images/partners/Popcat.png" onclick="location.href='https://popcateum.org/'">
+    
+    <img style="width: 15%;" src="./images/partners/Popdog.png" onclick="location.href='https://pdog.club/'">
+  
+  </div>
+  <br />
+  <div>
+    <iframe src="https://i.simmer.io/@SueunCho/-bbgtgame" style="width:960px;height:600px"></iframe>
+  </div>
+
+
+  <br />
+  <br />
+
+  <footer>
+    <div style="text-align: center;">
+      copyrightⓒ 2021 All rights reserved by Bbaguette
+      <br />
+      https://github.com/bbaguette-world
+      <br/>
+      Please connect us: sueun.dev@gmail.com, junha.ahn.dev@gmail.com
+    </div>
+  </footer>
+  <script src="js/abi.js"></script>
+  <script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.0.2/bignumber.min.js'></script>
+  <script src="https://unpkg.com/web3@1.6.1/dist/web3.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
