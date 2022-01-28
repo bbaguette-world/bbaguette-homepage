@@ -4,4 +4,4 @@
 
 ## Second Public Sale
 
-![image](https://user-images.githubusercontent.com/41976906/148650030-c400fa19-af19-4786-b10f-ba2c1c1bcf94.png)
+![127 0 0 1_3000_ (1)](https://user-images.githubusercontent.com/57546981/151559173-a8d085bf-a35b-48f0-abf4-0a3c0cd999f6.png)
