@@ -1,11 +1,21 @@
 import { Controller, Get, Render } from '@nestjs/common';
-import { AppService } from './app.service';
-
 @Controller()
 export class AppController {
   @Get()
   @Render('index')
   root() {
-    return { message: 'Hello world!' };
+    return '';
+  }
+
+  @Get('nft')
+  @Render('nft')
+  nft() {
+    return '';
+  }
+
+  @Get('game')
+  @Render('game')
+  game() {
+    return '';
   }
 }
