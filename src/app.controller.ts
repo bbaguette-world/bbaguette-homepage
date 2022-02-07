@@ -1,6 +1,11 @@
 import { Controller, Get, Render } from '@nestjs/common';
 @Controller()
 export class AppController {
+  @Get('/health')
+  health() {
+    return 'OK';
+  }
+
   @Get()
   @Render('index')
   root() {
