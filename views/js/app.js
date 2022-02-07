@@ -277,6 +277,33 @@ const ERC721 = {
   getOwnerOf: async function (address) {
     return await ERC721.contract.methods.ownerOf(address).call();
   },
+  sendToken: async function (tokenID, toAddress) {
+    const alert = Alert(`send #${tokenID} to ${toAddress}...`);
+    const evmData = ERC721.contract.methods
+      .transferFrom(App.currentAccount, toAddress, tokenID)
+      .encodeABI();
+
+    const params = [
+      {
+        from: App.currentAccount,
+        to: config.contracts.ERC721.address,
+        data: evmData,
+        value: '0x0',
+      },
+    ];
+    ethereum
+      .request({
+        method: 'eth_sendTransaction',
+        params,
+      })
+      .then((result) => {
+        alert.close();
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
 
   getMetadata: async function (tokenId) {
     const tokenURI = ERC721.baseURI + tokenId;
@@ -284,6 +311,11 @@ const ERC721 = {
     return await result.json();
   },
 
+  clickTokenTransfer: async function (tokenId) {
+    const toAddress = prompt(`send your #${tokenId}, input toAddress`);
+    if (!toAddress) Alert('input valid ToAddress').close(2000);
+    ERC721.sendToken(tokenId, toAddress);
+  },
   makeNFTElement: function (tokenId, imagePath, attribute) {
     const div = document.createElement('div');
     div.classList.add('col');
@@ -294,6 +326,9 @@ const ERC721 = {
       card.classList.add('card');
       card.classList.add('h-100');
       div.appendChild(card);
+      div.onclick = function () {
+        ERC721.clickTokenTransfer(tokenId);
+      };
       {
         // image
         const img = document.createElement('img');
@@ -312,10 +347,11 @@ const ERC721 = {
         title.innerText = `#${tokenId}`;
         cardBody.appendChild(title);
 
-        const text = document.createElement('p');
-        text.classList.add('card-text');
-        text.innerText = JSON.stringify(attribute);
+        // const text = document.createElement('p');
+        // text.classList.add('card-text');
+        // text.innerText = JSON.stringify(attribute);
         // cardBody.appendChild(text);
+
         card.appendChild(cardBody);
       }
     }
@@ -421,7 +457,6 @@ const buyERC721 = {
       const alert = Alert(
         'Please wait for the increaseAllowance transaction will be confirmed.',
       );
-      // alert.style = 'display:none;';
       const interval = setInterval(function () {
         web3.eth.getTransactionReceipt(hash, function (err, rec) {
           console.log('watting increaseAllowance tx receipt...');
@@ -439,10 +474,10 @@ const buyERC721 = {
 
   sendMint: async function (value, evmData) {
     const isSale = await buyERC721.getIsSale();
-    if (!isSale) {
-      Alert('The sale has not started.').close(3000);
-      return;
-    }
+    // if (!isSale) {
+    //   Alert('The sale has not started.').close(3000);
+    //   return;
+    // }
 
     const params = [
       {
