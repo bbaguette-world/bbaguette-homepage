@@ -7,19 +7,19 @@ import * as fs from 'fs';
 
 async function bootstrap() {
   const ENV = process.env.NODE_ENV;
-  let PORT = 80;
-  let httpsOptions = null;
+  let PORT = 3000;
+  // let httpsOptions = null;
 
-  if (ENV === 'prod') {
-    PORT = 443;
-    httpsOptions = {
-      ca: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/fullchain.pem'),
-      key: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/cert.pem'),
-    };
-  }
+  // if (ENV === 'prod') {
+  //   PORT = 443;
+  //   httpsOptions = {
+  //     ca: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/fullchain.pem'),
+  //     key: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/privkey.pem'),
+  //     cert: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/cert.pem'),
+  //   };
+  // }
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    httpsOptions,
+    // httpsOptions,
   });
 
   hbs.registerPartials(join(__dirname, '..', 'views/partials'));
