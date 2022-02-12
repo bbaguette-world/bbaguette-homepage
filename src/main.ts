@@ -3,7 +3,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import * as hbs from 'hbs';
-import fs from 'fs';
+import * as fs from 'fs';
 
 async function bootstrap() {
   const ENV = process.env.NODE_ENV;
