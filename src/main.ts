@@ -7,7 +7,7 @@ import * as fs from 'fs';
 
 async function bootstrap() {
   const ENV = process.env.NODE_ENV;
-  let PORT = 3000;
+  let PORT = 8080;
   // let httpsOptions = null;
 
   // if (ENV === 'prod') {
