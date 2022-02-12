@@ -3,9 +3,23 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import * as hbs from 'hbs';
+import fs from 'fs';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const ENV = process.env.NODE_ENV;
+  let PORT = 80;
+  let httpsOptions = null;
+
+  if (ENV === 'prod') {
+    PORT = 443;
+    httpsOptions = {
+      key: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/cert.pem'),
+    };
+  }
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    httpsOptions,
+  });
 
   hbs.registerPartials(join(__dirname, '..', 'views/partials'));
   app.useStaticAssets(join(__dirname, '..', 'views'));
@@ -13,6 +27,6 @@ async function bootstrap() {
 
   app.setViewEngine('hbs');
 
-  await app.listen(80);
+  await app.listen(PORT);
 }
 bootstrap();
