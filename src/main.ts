@@ -13,6 +13,7 @@ async function bootstrap() {
   if (ENV === 'prod') {
     PORT = 443;
     httpsOptions = {
+      ca: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/fullchain.pem'),
       key: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/privkey.pem'),
       cert: fs.readFileSync('/etc/letsencrypt/live/bbaguette.xyz/cert.pem'),
     };
